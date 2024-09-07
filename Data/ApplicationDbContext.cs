@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Projeto_GestaoContratos.Models;
 
 namespace Projeto_GestaoContratos.Data
 {
@@ -9,5 +10,6 @@ namespace Projeto_GestaoContratos.Data
             : base(options)
         {
         }
+        public DbSet<Projeto_GestaoContratos.Models.Contratos> Contratos { get; set; } = default!;
     }
 }
