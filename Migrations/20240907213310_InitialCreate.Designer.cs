@@ -12,7 +12,7 @@ using Projeto_GestaoContratos.Data;
 namespace Projeto_GestaoContratos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240907205756_InitialCreate")]
+    [Migration("20240907213310_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
