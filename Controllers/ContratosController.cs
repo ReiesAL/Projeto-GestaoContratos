@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using Projeto_GestaoContratos.Models;
 
 namespace Projeto_GestaoContratos.Controllers
 {
+    [Authorize]
+
     public class ContratosController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -40,12 +43,34 @@ namespace Projeto_GestaoContratos.Controllers
                 return NotFound();
             }
 
+            // Adicionando log com as informações local
+            _context.LogUsuarios.Add(
+                new LogUsuarios
+                {
+                    EmailUsuario = User.Identity.Name,
+                    Detalhes = string.Concat("Entrou na tela de detalhes do contrato",
+                    contratos.Id, " - ", contratos.Nome)
+
+                });
+
+            _context.SaveChanges();
+
             return View(contratos);
         }
 
         // GET: Contratos/Create
         public IActionResult Create()
         {
+            // Adicionando log com as informações local
+            _context.LogUsuarios.Add(
+                new LogUsuarios
+                {
+                    EmailUsuario = User.Identity.Name,
+                    Detalhes = "Entrou na tela de cadastro de contratos"
+                });
+
+            _context.SaveChanges();
+
             return View();
         }
 
@@ -60,6 +85,17 @@ namespace Projeto_GestaoContratos.Controllers
             {
                 _context.Add(contratos);
                 await _context.SaveChangesAsync();
+
+                // Adicionando log com as informações local
+                _context.LogUsuarios.Add(
+                new LogUsuarios
+                {
+                    EmailUsuario = User.Identity.Name,
+                    Detalhes = string.Concat("Cadastrou o contrato: ",
+                    contratos.Contrato, "Data de cadastro: ", DateTime.Now.ToLongDateString())
+                });
+                _context.SaveChanges();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(contratos);
@@ -78,6 +114,19 @@ namespace Projeto_GestaoContratos.Controllers
             {
                 return NotFound();
             }
+
+            // Adicionando log com as informações local
+            _context.LogUsuarios.Add(
+                new LogUsuarios
+                {
+                    EmailUsuario = User.Identity.Name,
+                    Detalhes = string.Concat( "Entrou na tela de edição de contratos", 
+                    contratos.Id, " - ", contratos.Nome)
+                    
+                });
+
+            _context.SaveChanges();
+
             return View(contratos);
         }
 
@@ -99,6 +148,18 @@ namespace Projeto_GestaoContratos.Controllers
                 {
                     _context.Update(contratos);
                     await _context.SaveChangesAsync();
+
+                    // Adicionando log com as informações local
+                    _context.LogUsuarios.Add(
+                    new LogUsuarios
+                    {
+                        EmailUsuario = User.Identity.Name,
+                        Detalhes = string.Concat("Atualizou o contrato: ",
+                        contratos.Contrato, "Data de atualização: ", DateTime.Now.ToLongDateString())
+                    });
+                    _context.SaveChanges();
+
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -144,6 +205,17 @@ namespace Projeto_GestaoContratos.Controllers
             {
                 _context.Contratos.Remove(contratos);
             }
+
+            // Adicionando log com as informações local
+            _context.LogUsuarios.Add(
+                new LogUsuarios
+                {
+                    EmailUsuario = User.Identity.Name,
+                    Detalhes = string.Concat("Removeu o contrato: ",
+                    contratos.Contrato, "Data de remoção: ", DateTime.Now.ToLongDateString())
+                });
+
+            _context.SaveChanges();
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
