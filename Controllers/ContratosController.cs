@@ -92,7 +92,7 @@ namespace Projeto_GestaoContratos.Controllers
                 {
                     EmailUsuario = User.Identity.Name,
                     Detalhes = string.Concat("Cadastrou o contrato: ",
-                    contratos.Contrato, "Data de cadastro: ", DateTime.Now.ToLongDateString())
+                    contratos.Contrato, " Data de cadastro: ", DateTime.Now.ToLongDateString())
                 });
                 _context.SaveChanges();
 
@@ -155,7 +155,7 @@ namespace Projeto_GestaoContratos.Controllers
                     {
                         EmailUsuario = User.Identity.Name,
                         Detalhes = string.Concat("Atualizou o contrato: ",
-                        contratos.Contrato, "Data de atualização: ", DateTime.Now.ToLongDateString())
+                        contratos.Contrato, " Data de atualização: ", DateTime.Now.ToLongDateString())
                     });
                     _context.SaveChanges();
 
@@ -212,7 +212,7 @@ namespace Projeto_GestaoContratos.Controllers
                 {
                     EmailUsuario = User.Identity.Name,
                     Detalhes = string.Concat("Removeu o contrato: ",
-                    contratos.Contrato, "Data de remoção: ", DateTime.Now.ToLongDateString())
+                    contratos.Contrato, " Data de remoção: ", DateTime.Now.ToLongDateString())
                 });
 
             _context.SaveChanges();

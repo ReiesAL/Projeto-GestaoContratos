@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Projeto_GestaoContratos.Models.LogUsuarios>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Log de usuários</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalhes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailUsuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Detalhes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailUsuario)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
