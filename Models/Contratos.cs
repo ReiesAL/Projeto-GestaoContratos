@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 // Definição do modelo da tabela "Contratos"
 namespace Projeto_GestaoContratos.Models
@@ -28,9 +29,9 @@ namespace Projeto_GestaoContratos.Models
         [Display(Name = "Produto")]
         public string Produto { get; set; }
 
-        [Column("Valor")]
+        [Precision(18, 2)]
         [Display(Name = "Valor")]
-        public decimal Valor { get; set; } 
+        public decimal Valor { get; set; }
 
         [Column("Vencimento")]
         [Display(Name = "Vencimento")]
