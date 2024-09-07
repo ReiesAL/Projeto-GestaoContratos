@@ -10,6 +10,7 @@ namespace Projeto_GestaoContratos.Data
             : base(options)
         {
         }
-        public DbSet<Projeto_GestaoContratos.Models.Contratos> Contratos { get; set; } = default!;
-    }
+        public DbSet<Contratos> Contratos { get; set; } = default!;
+        public DbSet<LogUsuarios> LogUsuarios { get; set; }
+        }
 }
