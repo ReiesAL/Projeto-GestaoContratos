@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_GestaoContratos.Models;
 using System.Diagnostics;
 
 namespace Projeto_GestaoContratos.Controllers
 {
+    // Requerimento de login ao tentar entrar
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

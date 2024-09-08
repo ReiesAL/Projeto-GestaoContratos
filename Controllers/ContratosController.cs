@@ -11,8 +11,8 @@ using Projeto_GestaoContratos.Models;
 
 namespace Projeto_GestaoContratos.Controllers
 {
+    // Requerimento de login ao tentar entrar
     [Authorize]
-
     public class ContratosController : Controller
     {
         private readonly ApplicationDbContext _context;
