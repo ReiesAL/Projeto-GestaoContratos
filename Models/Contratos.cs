@@ -30,6 +30,7 @@ namespace Projeto_GestaoContratos.Models
         public required string Produto { get; set; }
 
         [Precision(18, 2)]
+        [Column("Valor")]
         [Display(Name = "Valor")]
         public required decimal Valor { get; set; }
 
