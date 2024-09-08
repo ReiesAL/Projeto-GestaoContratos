@@ -257,11 +257,11 @@ namespace Projeto_GestaoContratos.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Produto");
 
-                    b.Property<string>("UsuarioCpf")
+                    b.Property<string>("UsuarioEmail")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)")
-                        .HasColumnName("UsuarioCpf");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)")
+                        .HasColumnName("UsuarioEmail");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(18, 2)

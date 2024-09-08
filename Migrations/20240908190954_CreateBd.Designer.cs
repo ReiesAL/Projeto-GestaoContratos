@@ -12,8 +12,8 @@ using Projeto_GestaoContratos.Data;
 namespace Projeto_GestaoContratos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240907213310_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240908190954_CreateBd")]
+    partial class CreateBd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,11 +260,11 @@ namespace Projeto_GestaoContratos.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Produto");
 
-                    b.Property<string>("UsuarioCpf")
+                    b.Property<string>("UsuarioEmail")
                         .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)")
-                        .HasColumnName("UsuarioCpf");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)")
+                        .HasColumnName("UsuarioEmail");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(18, 2)
