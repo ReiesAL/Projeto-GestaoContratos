@@ -32,31 +32,29 @@
             <input asp-for="Produto" class="form-control" />
             <span asp-validation-for="Produto" class="text-danger"></span>
         </div>
-        <div class="col-sm-4 mt-2">
+        <div class="col-sm-2 mt-2">
             <label asp-for="Valor" class="control-label"></label>
             <input asp-for="Valor" class="form-control" />
             <span asp-validation-for="Valor" class="text-danger"></span>
         </div>
-        <div class="col-sm-4 mt-2">
+        <div class="col-sm-2 mt-2">
             <label asp-for="Vencimento" class="control-label"></label>
-            <input asp-for="Vencimento" class="form-control" />
+            <input asp-for="Vencimento" class="form-control" type="date" />
             <span asp-validation-for="Vencimento" class="text-danger"></span>
         </div>
-        <div class="col-sm-4 mt-2">
-            <label asp-for="DataInclusao" class="control-label"></label>
-            <input asp-for="DataInclusao" class="form-control" />
-            <span asp-validation-for="DataInclusao" class="text-danger"></span>
+        <div class="form-group" style="display: none;">
+            <label asp-for="UsuarioEmail" class="control-label"></label>
+            <input asp-for="UsuarioEmail" class="form-control" value="@User.Identity.Name" readonly />
+            <span asp-validation-for="UsuarioEmail" class="text-danger"></span>
         </div>
-        <div class="col-sm-4 mt-2">
-            <label asp-for="UsuarioCpf" class="control-label"></label>
-            <input asp-for="UsuarioCpf" class="form-control" />
-            <span asp-validation-for="UsuarioCpf" class="text-danger"></span>
-        </div>
-        <div class="col-sm-4 mt-2">
-            <input type="submit" value="txt" class="btn btn-primary" />
+        <div class="col-sm-4 mt-3 d-flex">
+            <input type="submit" value="Create" class="form-control btn btn-primary" />
         </div>
     </div>
 </form>
+
+<h3 class="mt-4">Ou adicione um arquivo para carga</h3>
+<hr />
 
 <div>
     <a asp-action="Index">Back to List</a>

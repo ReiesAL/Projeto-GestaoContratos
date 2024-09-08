@@ -15,36 +15,36 @@ namespace Projeto_GestaoContratos.Models
         [Column("Cpf")]
         [Display(Name = "CPF")]
         [StringLength(14)] 
-        public string Cpf { get; set; } 
+        public required string Cpf { get; set; } 
 
         [Column("Contrato")]
         [Display(Name = "Contrato")]
-        public int Contrato { get; set; }
+        public required int Contrato { get; set; }
 
         [Column("Nome")]
         [Display(Name = "Nome")]
-        public string Nome { get; set; }
+        public required string Nome { get; set; }
 
         [Column("Produto")]
         [Display(Name = "Produto")]
-        public string Produto { get; set; }
+        public required string Produto { get; set; }
 
         [Precision(18, 2)]
         [Display(Name = "Valor")]
-        public decimal Valor { get; set; }
+        public required decimal Valor { get; set; }
 
         [Column("Vencimento")]
         [Display(Name = "Vencimento")]
-        public DateTime Vencimento { get; set; } 
+        public required DateTime Vencimento { get; set; }
 
         [Column("DataInclusao")]
         [Display(Name = "Data Inclusão")]
-        public DateTime DataInclusao { get; set; }
+        public DateTime DataInclusao { get; set; } = DateTime.Today; // Define a data de inclusão com hora 
 
-        [Column("UsuarioCpf")]
-        [Display(Name = "Usuário CPF")]
-        [StringLength(14)] 
-        public string UsuarioCpf { get; set; } 
+        [Column("UsuarioEmail")]
+        [Display(Name = "Usuário Email")]
+        [StringLength(180)]  
+        public string UsuarioEmail { get; set; }
 
     }
 }

@@ -11,7 +11,6 @@ using Projeto_GestaoContratos.Models;
 
 namespace Projeto_GestaoContratos.Controllers
 {
-    // Requerimento de login ao tentar entrar
     [Authorize]
     public class ContratosController : Controller
     {
@@ -48,12 +47,10 @@ namespace Projeto_GestaoContratos.Controllers
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = string.Concat("Entrou na tela de detalhes do contrato",
-                    contratos.Id, " - ", contratos.Nome)
-
+                    Detalhes = $"Entrou na tela de detalhes do contrato {contratos.Id} - {contratos.Nome}"
                 });
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return View(contratos);
         }
@@ -79,27 +76,28 @@ namespace Projeto_GestaoContratos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,DataInclusao,UsuarioCpf")] Contratos contratos)
+        public async Task<IActionResult> Create([Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,DataInclusao,UsuarioEmail")] Contratos contratos)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(contratos);
                 await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
 
-                // Adicionando log com as informações local
-                _context.LogUsuarios.Add(
+            // Adicionando log com as informações local
+            _context.LogUsuarios.Add(
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = string.Concat("Cadastrou o contrato: ",
-                    contratos.Contrato, " Data de cadastro: ", DateTime.Now.ToLongDateString())
+                    Detalhes = $"Adicionou o contrato {contratos.Id} - {contratos.Nome}"
                 });
-                _context.SaveChanges();
 
-                return RedirectToAction(nameof(Index));
-            }
+            await _context.SaveChangesAsync();
+
             return View(contratos);
         }
+
 
         // GET: Contratos/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -120,22 +118,18 @@ namespace Projeto_GestaoContratos.Controllers
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = string.Concat( "Entrou na tela de edição de contratos", 
-                    contratos.Id, " - ", contratos.Nome)
-                    
+                    Detalhes = $"Entrou na tela de edição de contratos {contratos.Id} - {contratos.Nome}"
                 });
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return View(contratos);
         }
 
         // POST: Contratos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,DataInclusao,UsuarioCpf")] Contratos contratos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento")] Contratos contratos)
         {
             if (id != contratos.Id)
             {
@@ -151,13 +145,12 @@ namespace Projeto_GestaoContratos.Controllers
 
                     // Adicionando log com as informações local
                     _context.LogUsuarios.Add(
-                    new LogUsuarios
-                    {
-                        EmailUsuario = User.Identity.Name,
-                        Detalhes = string.Concat("Atualizou o contrato: ",
-                        contratos.Contrato, " Data de atualização: ", DateTime.Now.ToLongDateString())
-                    });
-                    _context.SaveChanges();
+                        new LogUsuarios
+                        {
+                            EmailUsuario = User.Identity.Name,
+                            Detalhes = $"Atualizou o contrato: {contratos.Contrato} Data de atualização: {DateTime.Now.ToLongDateString()}"
+                        });
+                    await _context.SaveChangesAsync();
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -172,7 +165,6 @@ namespace Projeto_GestaoContratos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(contratos);
         }
@@ -204,20 +196,18 @@ namespace Projeto_GestaoContratos.Controllers
             if (contratos != null)
             {
                 _context.Contratos.Remove(contratos);
+
+                // Adicionando log com as informações local
+                _context.LogUsuarios.Add(
+                    new LogUsuarios
+                    {
+                        EmailUsuario = User.Identity.Name,
+                        Detalhes = $"Removeu o contrato: {contratos.Contrato} Data de remoção: {DateTime.Now.ToLongDateString()}"
+                    });
+
+                await _context.SaveChangesAsync();
             }
 
-            // Adicionando log com as informações local
-            _context.LogUsuarios.Add(
-                new LogUsuarios
-                {
-                    EmailUsuario = User.Identity.Name,
-                    Detalhes = string.Concat("Removeu o contrato: ",
-                    contratos.Contrato, " Data de remoção: ", DateTime.Now.ToLongDateString())
-                });
-
-            _context.SaveChanges();
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
