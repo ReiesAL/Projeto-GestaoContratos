@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Projeto_GestaoContratos.Data;
 using Projeto_GestaoContratos.Models;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using CsvHelper;
+using CsvHelper.Configuration;
+using CsvReader = CsvHelper.CsvReader; // Adiciona um alias para evitar ambiguidades
+
 
 namespace Projeto_GestaoContratos.Controllers
 {
@@ -214,6 +222,55 @@ namespace Projeto_GestaoContratos.Controllers
         private bool ContratosExists(int id)
         {
             return _context.Contratos.Any(e => e.Id == id);
+        }
+
+        // Arquivo csv
+        // Controlador para importar CSV
+        public class ImportacaoController : Controller
+        {
+            private readonly ApplicationDbContext _context;
+
+            public ImportacaoController(ApplicationDbContext context)
+            {
+                _context = context;
+            }
+
+            [HttpPost]
+            public async Task<IActionResult> ImportCsv(IFormFile file)
+            {
+                if (file == null || file.Length == 0)
+                {
+                    ModelState.AddModelError("", "Nenhum arquivo selecionado.");
+                    return View();
+                }
+
+                try
+                {
+                    using (var reader = new StreamReader(file.OpenReadStream()))
+                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        Delimiter = ";",
+                        HasHeaderRecord = true,
+                        HeaderValidated = null,
+                        MissingFieldFound = null
+                    }))
+                    {
+                        csv.Context.RegisterClassMap<ContratosMap>(); // Registra a classe de mapeamento
+
+                        var records = csv.GetRecords<Contratos>().ToList();
+
+                        _context.Contratos.AddRange(records);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Erro ao importar o arquivo CSV: {ex.Message}");
+                    return View();
+                }
+            }
         }
     }
 }
