@@ -1,7 +1,11 @@
+using CsvHelper;
+using CsvHelper.Configuration;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Projeto_GestaoContratos.Data;
+using Projeto_GestaoContratos.Models;
+using System.Globalization;
 
 // Configura o aplicativo e suas dependências
 var builder = WebApplication.CreateBuilder(args);
