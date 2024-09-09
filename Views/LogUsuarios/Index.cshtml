@@ -4,30 +4,40 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="display-4 text-center">Log de usuários</h1>
+<div class="form-group row">
+    <div class="col-sm-12">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailUsuario)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Detalhes)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailUsuario)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Detalhes)
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+        <!--Título-->
+        <h1 class="display-4 text-center">Log de usuários</h1>
+        <hr/>
+
+        <!--Lista de atividades-->
+        <div class="table-container mt-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmailUsuario)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Detalhes)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailUsuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Detalhes)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

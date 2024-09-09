@@ -4,66 +4,73 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Remover</h1>
+<div class="form-group row">
+    <div class="col-sm-12">
 
-<div>
-    <h1 class="display-4 text-center">Você tem certeza de que deseja remover o contrato de número @Model.Contrato com nome de @Model.Nome?</h1>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cpf)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cpf)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Contrato)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Contrato)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Produto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Produto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Valor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Valor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Vencimento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Vencimento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataInclusao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataInclusao)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UsuarioInclusao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UsuarioInclusao)
-        </dd>
-    </dl>
+        <!--Título-->
+        <h1 class="display-4">Remover</h1>
+
+        <!--Sub-Título-->
+        <h1 class="display-6 text-center">Você tem certeza de que deseja remover o contrato de número @Model.Contrato com nome de @Model.Nome?</h1>
+        <hr />
+
+        <!--Ficha-Contrato-->
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Cpf)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Cpf)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Contrato)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Contrato)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Produto)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Produto)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Valor)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Valor)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Vencimento)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Vencimento)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DataInclusao)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DataInclusao)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.UsuarioInclusao)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.UsuarioInclusao)
+            </dd>
+        </dl>
     
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <hr/>
-        <input type="submit" value="Remover" class="btn btn-danger col-sm-6"/> 
-        <a asp-action="Index">Voltar para a lista</a>
-    </form>
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <hr/>
+            <input type="submit" value="Remover" class="btn btn-danger col-sm-6"/> 
+            <a asp-action="Index">Voltar para a lista</a>
+        </form>
+    </div>
 </div>

@@ -4,7 +4,6 @@
     ViewData["Title"] = "Create";
 }
 
-
 <div class="form-group row">
     <div class="col-sm-12">
 
@@ -15,6 +14,7 @@
         <h4 class="display-6">Contrato Unitário</h4>
         <hr />
 
+        <!--Formulário-Manual-->
         <form asp-action="Create">
             <div class="form-group row">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -59,7 +59,7 @@
             </div>
         </form>
 
-
+        <!--Anexo-Arquivo-Csv-->
         <form asp-controller="Contratos" asp-action="ImportCsv" enctype="multipart/form-data" method="post">
             <div class="mt-4">
                 <h4>Carga de Contratos</h4>
@@ -81,7 +81,6 @@
         </div>
     </div>
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

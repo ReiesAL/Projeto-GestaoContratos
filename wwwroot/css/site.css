@@ -27,3 +27,23 @@ body {
 .btn {
     margin-top: 8px;
 }
+
+.table-container {
+    max-height: 50%; /* Ajuste a altura máxima conforme necessário */
+    overflow: auto; /* Permite rolagem horizontal e vertical */
+    -webkit-overflow-scrolling: touch; /* Suporte a rolagem suave em iOS */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+thead th {
+    background-color: #f4f4f4;
+}
