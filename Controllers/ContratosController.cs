@@ -21,11 +21,7 @@ namespace Projeto_GestaoContratos.Controllers
             _context = context;
         }
 
-        // GET: Contratos
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Contratos.ToListAsync());
-        //}
+        // GET: Contratos não deletados
         public async Task<IActionResult> Index()
         {
             // Obtém todos os contratos onde Remocao é falso ou nulo
