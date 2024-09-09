@@ -48,11 +48,11 @@
                     <span asp-validation-for="Vencimento" class="text-danger"></span>
                 </div>
                 <div class="form-group" style="display: none;">
-                    <label asp-for="UsuarioEmail" class="control-label"></label>
-                    <input asp-for="UsuarioEmail" class="form-control" value="@User.Identity.Name" readonly />
-                    <span asp-validation-for="UsuarioEmail" class="text-danger"></span>
+                    <label asp-for="UsuarioInclusao" class="control-label"></label>
+                    <input asp-for="UsuarioInclusao" class="form-control" value="@User.Identity.Name" readonly />
+                    <span asp-validation-for="UsuarioInclusao" class="text-danger"></span>
                 </div>
-                <div class="col-sm-4 mt-3 d-flex">
+                <div class="col-sm-4 mt-3 justify-content-end">
                     <input type="submit" value="Create" class="form-control btn btn-primary" />
                 </div>
             </div>
@@ -85,3 +85,4 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
