@@ -47,7 +47,7 @@ namespace Projeto_GestaoContratos.Controllers
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = $"Entrou na tela de detalhes do contrato {contratos.Id} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
+                    Detalhes = $"Entrou na tela de detalhes do contrato: {contratos.Id} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
                 });
 
             _context.SaveChanges();
@@ -69,20 +69,20 @@ namespace Projeto_GestaoContratos.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(contratos);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
 
-            // Adicionando log com as informações local
-            _context.LogUsuarios.Add(
+                // Adicionando log com as informações local
+                _context.LogUsuarios.Add(
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = $"Adicionou um novo contrato {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
-
+                    Detalhes = $"Adicionou um novo contrato: {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
                 });
 
-            _context.SaveChanges();
+                _context.SaveChanges();
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
 
             return View(contratos);
         }
@@ -237,7 +237,7 @@ namespace Projeto_GestaoContratos.Controllers
 
                 return RedirectToAction("Index"); // Redireciona para a página de listagem ou onde desejar
             }
-            catch (Exception ex)
+            catch 
             { 
                 return View("Index");
             }

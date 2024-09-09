@@ -23,10 +23,12 @@ namespace Projeto_GestaoContratos.Models
 
         [Column("Nome")]
         [Display(Name = "Nome")]
+        [StringLength(100)]
         public required string Nome { get; set; }
 
         [Column("Produto")]
         [Display(Name = "Produto")]
+        [StringLength(100)]
         public required string Produto { get; set; }
 
         [Precision(18, 2)]
@@ -40,7 +42,7 @@ namespace Projeto_GestaoContratos.Models
 
         [Column("UsuarioEmail")]
         [Display(Name = "Usuário Email")]
-        [StringLength(180)]
+        [StringLength(100)]
         public string UsuarioEmail { get; set; }
 
         [Column("DataInclusao")]
