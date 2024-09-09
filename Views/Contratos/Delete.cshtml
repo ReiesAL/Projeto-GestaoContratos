@@ -6,9 +6,8 @@
 
 <h1>Remover</h1>
 
-<h3>Você tem certeza de que deseja remover esse contrato?</h3>
 <div>
-    <h4>Contratos</h4>
+    <h4>Você tem certeza de que deseja remover o contrato de número @Model.Contrato com nome de @Model.Nome?</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -63,7 +62,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <hr/>
+        <input type="submit" value="Remover" class="btn btn-danger col-sm-6"/> 
+        <a asp-action="Index">Voltar para a lista</a>
     </form>
 </div>

@@ -47,15 +47,21 @@
                 <input asp-for="Vencimento" class="form-control" type="date"/>
                 <span asp-validation-for="Vencimento" class="text-danger"></span>
             </div>
-            <div class="col-sm-12 mt-2">
-                <input class="btn btn-success" type="submit" value="Save"/>
+            <div class="form-group" style="display: none;">
+                <label asp-for="UsuarioInclusao" class="control-label"></label>
+                <input asp-for="UsuarioInclusao" class="form-control" value="@User.Identity.Name" readonly />
+                <span asp-validation-for="UsuarioInclusao" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group d-flex justify-content-center">
+                <input class="btn btn-success col-sm-4" type="submit" value="Atualizar"/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Voltar para a lista</a>
+    <a class="mt-4" asp-action="Index">Voltar para a lista</a>
 </div>
 
 @section Scripts {

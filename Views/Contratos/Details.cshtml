@@ -64,11 +64,12 @@
                 @Html.DisplayFor(model => model.UsuarioInclusao)
             </dd>
         </dl>
-        <div>
-            <a type="button" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-secondary">Editar</a>
-            <a type="button" asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Deletar</a>
-            <a asp-action="Index">Back to List</a>
-        </div>
+        <hr />
+    </div>
+    <div class="row justify-content-between">
+        <a type="button" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-secondary col-sm-4">Editar</a>
+        <a type="button" asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger col-sm-4">Deletar</a>
+        <a class="mt-2" asp-action="Index">Voltar para lista</a>
     </div>
 </div>
 
