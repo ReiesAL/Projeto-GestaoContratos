@@ -43,7 +43,7 @@ namespace Projeto_GestaoContratos.Models
         [Column("UsuarioEmail")]
         [Display(Name = "Usuário Email")]
         [StringLength(100)]
-        public string UsuarioEmail { get; set; }
+        public required string UsuarioEmail { get; set; }
 
         [Column("DataInclusao")]
         [Display(Name = "Data de Inclusão")]
