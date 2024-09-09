@@ -55,7 +55,7 @@
 
 <h1>Upload CSV</h1>
 <hr />
-<form asp-action="UploadCsv" enctype="multipart/form-data" method="post">
+<form asp-controller="Contratos" asp-action="ImportCsv" enctype="multipart/form-data" method="post">
     @if (TempData["Message"] != null)
     {
         <div class="alert alert-success">
