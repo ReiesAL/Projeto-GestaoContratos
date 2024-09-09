@@ -53,6 +53,10 @@ namespace Projeto_GestaoContratos.Models
         [Display(Name = "Remoção")]
         public bool Remocao { get; set; } // Use bool para indicar remoção
 
+        [Column("UsuarioRemocao")]
+        [Display(Name = "Usuario que Removeu")]
+        public string? UsuarioRemocao { get; set; } 
+
         [Column("DataRemocao")]
         [Display(Name = "Data de Remoção")]
         public DateTime? DataRemocao { get; set; } // Nullable para permitir ausência de data
