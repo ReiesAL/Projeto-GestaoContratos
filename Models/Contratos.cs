@@ -40,10 +40,10 @@ namespace Projeto_GestaoContratos.Models
         [Display(Name = "Vencimento")]
         public required DateOnly Vencimento { get; set; }
 
-        [Column("UsuarioEmail")]
-        [Display(Name = "Usuário Email")]
+        [Column("UsuarioInclusao")]
+        [Display(Name = "Usuário que Incluiu")]
         [StringLength(100)]
-        public required string UsuarioEmail { get; set; }
+        public required string UsuarioInclusao { get; set; }
 
         [Column("DataInclusao")]
         [Display(Name = "Data de Inclusão")]

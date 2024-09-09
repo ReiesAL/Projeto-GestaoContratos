@@ -2,11 +2,9 @@
 
 namespace Projeto_GestaoContratos.Models.Mapping
 {
-    // Classe de mapeamento dos dados do arquivo csv herdando a classe principal
     public class ContratosMap : ClassMap<Contratos>
     {
-        // Momento que ocorre o mapeamento de onde vem as colunas para onde quero
-        public ContratosMap()
+        public ContratosMap(string userName)
         {
             Map(m => m.Id).Ignore();
             Map(m => m.Cpf).Name("CPF");
@@ -14,9 +12,9 @@ namespace Projeto_GestaoContratos.Models.Mapping
             Map(m => m.Nome).Name("Nome");
             Map(m => m.Produto).Name("Produto");
             Map(m => m.Valor).Name("Valor");
-            Map(m => m.Vencimento).Name("Vencimento").TypeConverterOption.Format("dd/MM/yyyy"); // Se precisar do formato específico
+            Map(m => m.Vencimento).Name("Vencimento").TypeConverterOption.Format("dd/MM/yyyy");
             Map(m => m.DataInclusao).Default(DateTime.Now); // Atribui a data atual com horário
-            Map(m => m.UsuarioEmail).Default("default@example.com"); // Atribui um email padrão
+            Map(m => m.UsuarioInclusao).Default(userName); // Usa o nome do usuário como valor padrão
         }
     }
 }
