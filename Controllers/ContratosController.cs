@@ -71,7 +71,7 @@ namespace Projeto_GestaoContratos.Controllers
         // POST: Adicionar - Criação de novo contrato manualmente
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,DataInclusao,UsuarioInclusao")] Contratos contratos)
+        public async Task<IActionResult> Create([Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,UsuarioInclusao")] Contratos contratos)
         {
             if (ModelState.IsValid)
             {

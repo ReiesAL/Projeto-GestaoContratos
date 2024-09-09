@@ -47,7 +47,7 @@ namespace Projeto_GestaoContratos.Models
 
         [Column("DataInclusao")]
         [Display(Name = "Data de Inclusão")]
-        public DateTime DataInclusao { get; set; } = DateTime.Today; // Define a data de inclusão com hora 00:00
+        public DateTime DataInclusao { get; set; } = DateTime.Now; // Define a data de inclusão com hora 00:00
 
         [Column("Remocao")]
         [Display(Name = "Remoção")]
