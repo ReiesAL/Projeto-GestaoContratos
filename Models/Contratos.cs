@@ -36,7 +36,7 @@ namespace Projeto_GestaoContratos.Models
 
         [Column("Vencimento")]
         [Display(Name = "Vencimento")]
-        public required DateTime Vencimento { get; set; }
+        public DateOnly Vencimento { get; set; }
 
         [Column("DataInclusao")]
         [Display(Name = "Data Inclusão")]
