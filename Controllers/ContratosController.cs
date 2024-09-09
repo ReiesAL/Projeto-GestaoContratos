@@ -11,6 +11,7 @@ using Projeto_GestaoContratos.Models.Mapping;
 
 namespace Projeto_GestaoContratos.Controllers
 {
+
     [Authorize]
     public class ContratosController : Controller
     {
@@ -124,6 +125,8 @@ namespace Projeto_GestaoContratos.Controllers
             {
                 try
                 {
+                    var userName = User.Identity.Name; // Captura o nome do usuário autenticado
+
                     _context.Update(contratos);
                     await _context.SaveChangesAsync();
 
@@ -176,6 +179,7 @@ namespace Projeto_GestaoContratos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var contrato = await _context.Contratos.FindAsync(id);
             if (contrato != null)
             {
@@ -208,11 +212,8 @@ namespace Projeto_GestaoContratos.Controllers
         [HttpPost]
         public IActionResult ImportCsv(IFormFile file)
         {
-
             try
-            {
-                var userName = User.Identity.Name; // Captura o nome do usuário autenticado
-
+            { 
                 // Configuração do CsvHelper para ler o CSV com reforço de cultura
                 var config = new CsvConfiguration(new CultureInfo("pt-BR"))
                 {
@@ -225,8 +226,10 @@ namespace Projeto_GestaoContratos.Controllers
                 using (var reader = new StreamReader(file.OpenReadStream()))
                 using (var csv = new CsvReader(reader, config))
                 {
-                    // Registra a classe de mapeamento se necessário
-                    csv.Context.RegisterClassMap(new ContratosMap(userName)); // Passa o nome do usuário para o mapeamento
+                    var userName = User.Identity.Name; // Captura o nome do usuário autenticado
+
+                    // Registra a classe e Passa o nome do usuário para o mapeamento
+                    csv.Context.RegisterClassMap(new ContratosMap(userName)); 
 
                     // Lê os registros do CSV e os converte para a lista de Contratos
                     var records = csv.GetRecords<Contratos>().ToList();
