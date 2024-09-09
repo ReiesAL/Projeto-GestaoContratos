@@ -22,9 +22,18 @@ namespace Projeto_GestaoContratos.Controllers
         }
 
         // GET: Contratos
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.Contratos.ToListAsync());
+        //}
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Contratos.ToListAsync());
+            // Obtém todos os contratos onde Remocao é falso ou nulo
+            var contratos = await _context.Contratos
+                .Where(c => !c.Remocao) // Filtra contratos não removidos
+                .ToListAsync();
+
+            return View(contratos);
         }
 
         // GET: Contratos/Details/5
@@ -167,28 +176,53 @@ namespace Projeto_GestaoContratos.Controllers
         }
 
         // POST: Contratos/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(int id)
+        //{
+        //    var contratos = await _context.Contratos.FindAsync(id);
+        //    if (contratos != null)
+        //    {
+        //        _context.Contratos.Remove(contratos);
+
+        //        // Adicionando log com as informações local
+        //        _context.LogUsuarios.Add(
+        //            new LogUsuarios
+        //            {
+        //                EmailUsuario = User.Identity.Name,
+        //                Detalhes = $"Removeu o contrato: {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
+        //            });
+
+        //        _context.SaveChanges();
+        //    }
+
+        //    return RedirectToAction(nameof(Index));
+        //}
+
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var contratos = await _context.Contratos.FindAsync(id);
-            if (contratos != null)
+            var contrato = await _context.Contratos.FindAsync(id);
+            if (contrato != null)
             {
-                _context.Contratos.Remove(contratos);
+                contrato.Remocao = true; // Marca o contrato como removido
+                //contrato.DataRemocao = DateTime.Now.ToLongDateString(); // Adicionando data de remoção
+                _context.Update(contrato);
 
                 // Adicionando log com as informações local
-                _context.LogUsuarios.Add(
-                    new LogUsuarios
-                    {
-                        EmailUsuario = User.Identity.Name,
-                        Detalhes = $"Removeu o contrato: {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
-                    });
+                _context.LogUsuarios.Add(new LogUsuarios
+                {
+                    EmailUsuario = User.Identity.Name,
+                    Detalhes = $"Removeu o contrato: {contrato.Contrato} - {contrato.Nome} em {DateTime.Now.ToLongDateString()}"
+                });
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
         }
+
 
         private bool ContratosExists(int id)
         {
@@ -198,7 +232,7 @@ namespace Projeto_GestaoContratos.Controllers
         // Arquivo csv
         // Controlador para importar CSV
         [HttpPost]
-        public async Task<IActionResult> ImportCsv(IFormFile file)
+        public IActionResult ImportCsv(IFormFile file)
         {
 
             try
@@ -237,8 +271,8 @@ namespace Projeto_GestaoContratos.Controllers
 
                 return RedirectToAction("Index"); // Redireciona para a página de listagem ou onde desejar
             }
-            catch 
-            { 
+            catch
+            {
                 return View("Index");
             }
         }
