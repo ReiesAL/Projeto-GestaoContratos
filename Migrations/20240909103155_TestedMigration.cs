@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Projeto_GestaoContratos.Migrations
 {
     /// <inheritdoc />
-    public partial class MigrationProject : Migration
+    public partial class TestedMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -29,7 +29,7 @@ body {
 }
 
 .table-container {
-    max-height: 50%; /* Ajuste a altura máxima conforme necessário */
+    max-height: 650px; /* Ajuste a altura máxima conforme necessário */
     overflow: auto; /* Permite rolagem horizontal e vertical */
     -webkit-overflow-scrolling: touch; /* Suporte a rolagem suave em iOS */
 }

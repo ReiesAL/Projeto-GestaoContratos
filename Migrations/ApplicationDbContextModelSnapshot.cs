@@ -25,18 +25,22 @@ namespace Projeto_GestaoContratos.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
@@ -58,13 +62,16 @@ namespace Projeto_GestaoContratos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -77,6 +84,7 @@ namespace Projeto_GestaoContratos.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
@@ -84,10 +92,12 @@ namespace Projeto_GestaoContratos.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
@@ -101,22 +111,27 @@ namespace Projeto_GestaoContratos.Migrations
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -124,6 +139,7 @@ namespace Projeto_GestaoContratos.Migrations
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
@@ -148,13 +164,16 @@ namespace Projeto_GestaoContratos.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -168,17 +187,21 @@ namespace Projeto_GestaoContratos.Migrations
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
                         .HasMaxLength(128)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
@@ -191,9 +214,11 @@ namespace Projeto_GestaoContratos.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("RoleId")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId", "RoleId");
@@ -206,17 +231,21 @@ namespace Projeto_GestaoContratos.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(128)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
@@ -240,6 +269,7 @@ namespace Projeto_GestaoContratos.Migrations
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasMaxLength(14)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(14)")
                         .HasColumnName("Cpf");
 
@@ -254,12 +284,14 @@ namespace Projeto_GestaoContratos.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Nome");
 
                     b.Property<string>("Produto")
                         .IsRequired()
                         .HasMaxLength(100)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("Produto");
 
@@ -270,10 +302,12 @@ namespace Projeto_GestaoContratos.Migrations
                     b.Property<string>("UsuarioInclusao")
                         .IsRequired()
                         .HasMaxLength(100)
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(100)")
                         .HasColumnName("UsuarioInclusao");
 
                     b.Property<string>("UsuarioRemocao")
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("UsuarioRemocao");
 
@@ -302,11 +336,13 @@ namespace Projeto_GestaoContratos.Migrations
 
                     b.Property<string>("Detalhes")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Detalhes");
 
                     b.Property<string>("EmailUsuario")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("EmailUsuario");
 
