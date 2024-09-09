@@ -172,29 +172,6 @@ namespace Projeto_GestaoContratos.Controllers
         }
 
         // POST: Contratos/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var contratos = await _context.Contratos.FindAsync(id);
-        //    if (contratos != null)
-        //    {
-        //        _context.Contratos.Remove(contratos);
-
-        //        // Adicionando log com as informações local
-        //        _context.LogUsuarios.Add(
-        //            new LogUsuarios
-        //            {
-        //                EmailUsuario = User.Identity.Name,
-        //                Detalhes = $"Removeu o contrato: {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
-        //            });
-
-        //        _context.SaveChanges();
-        //    }
-
-        //    return RedirectToAction(nameof(Index));
-        //}
-
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -203,7 +180,9 @@ namespace Projeto_GestaoContratos.Controllers
             if (contrato != null)
             {
                 contrato.Remocao = true; // Marca o contrato como removido
-                //contrato.DataRemocao = DateTime.Now.ToLongDateString(); // Adicionando data de remoção
+                contrato.DataRemocao = DateTime.Now; // Adiciona a data de remoção como DateTime
+                contrato.UsuarioRemocao = User.Identity.Name;
+
                 _context.Update(contrato);
 
                 // Adicionando log com as informações local
@@ -218,7 +197,6 @@ namespace Projeto_GestaoContratos.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
 
         private bool ContratosExists(int id)
         {
