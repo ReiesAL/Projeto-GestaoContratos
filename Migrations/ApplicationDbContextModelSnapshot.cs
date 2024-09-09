@@ -253,12 +253,14 @@ namespace Projeto_GestaoContratos.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("Nome");
 
                     b.Property<string>("Produto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("Produto");
 
                     b.Property<bool>("Remocao")
@@ -267,9 +269,13 @@ namespace Projeto_GestaoContratos.Migrations
 
                     b.Property<string>("UsuarioEmail")
                         .IsRequired()
-                        .HasMaxLength(180)
-                        .HasColumnType("nvarchar(180)")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
                         .HasColumnName("UsuarioEmail");
+
+                    b.Property<string>("UsuarioRemocao")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("UsuarioRemocao");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(18, 2)

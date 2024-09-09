@@ -58,13 +58,14 @@ namespace Projeto_GestaoContratos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Cpf = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Contrato = table.Column<int>(type: "int", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Produto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Produto = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Vencimento = table.Column<DateOnly>(type: "date", nullable: false),
-                    UsuarioEmail = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
+                    UsuarioEmail = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     DataInclusao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Remocao = table.Column<bool>(type: "bit", nullable: false),
+                    UsuarioRemocao = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataRemocao = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
