@@ -20,27 +20,27 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-sm-4 mt-2">
                     <label asp-for="Cpf" class="control-label"></label>
-                    <input asp-for="Cpf" class="form-control" />
+                    <input asp-for="Cpf" class="form-control" placeholder="Cpf do cliente"/>
                     <span asp-validation-for="Cpf" class="text-danger"></span>
                 </div>
                 <div class="col-sm-8 mt-2">
                     <label asp-for="Nome" class="control-label"></label>
-                    <input asp-for="Nome" class="form-control" />
+                    <input asp-for="Nome" class="form-control" placeholder="Nome do cliente"/>
                     <span asp-validation-for="Nome" class="text-danger"></span>
                 </div>
                 <div class="col-sm-4 mt-2">
                     <label asp-for="Contrato" class="control-label"></label>
-                    <input asp-for="Contrato" class="form-control" />
+                    <input asp-for="Contrato" class="form-control" placeholder="Número do contrato"/>
                     <span asp-validation-for="Contrato" class="text-danger"></span>
                 </div>
                 <div class="col-sm-4 mt-2">
                     <label asp-for="Produto" class="control-label"></label>
-                    <input asp-for="Produto" class="form-control" />
+                    <input asp-for="Produto" class="form-control" placeholder="Nome do produto"/>
                     <span asp-validation-for="Produto" class="text-danger"></span>
                 </div>
                 <div class="col-sm-2 mt-2">
                     <label asp-for="Valor" class="control-label"></label>
-                    <input asp-for="Valor" class="form-control" />
+                    <input asp-for="Valor" class="form-control" placeholder="Valor do produto"/>
                     <span asp-validation-for="Valor" class="text-danger"></span>
                 </div>
                 <div class="col-sm-2 mt-2">
@@ -53,8 +53,8 @@
                     <input asp-for="UsuarioInclusao" class="form-control" value="@User.Identity.Name" readonly />
                     <span asp-validation-for="UsuarioInclusao" class="text-danger"></span>
                 </div>
-                <div class="col-sm-4 mt-3 justify-content-end">
-                    <input type="submit" value="Create" class="form-control btn btn-primary" />
+                <div class="mt-3 d-flex justify-content-end">
+                    <input type="submit" value="Adicionar Contrato" class="col-sm-4 btn btn-success"/>
                 </div>
             </div>
         </form>
@@ -70,14 +70,14 @@
                         <input type="file" name="file" id="file" accept=".csv" class="form-control" />
                     </div>
                     <div class="col-sm-4 mt-4">
-                        <button type="submit" class="col-sm-12 btn btn-primary">Efetuar carga</button>
+                        <button type="submit" class="col-sm-12 btn btn-success">Efetuar carga</button>
                     </div>
                 </div>
             </div>
         </form>
 
-        <div>
-            <a asp-action="Index">Back to List</a>
+        <div class="mt-4">
+            <a asp-action="Index">Voltar para a lista</a>
         </div>
     </div>
 </div>
