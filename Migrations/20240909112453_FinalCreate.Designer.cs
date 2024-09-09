@@ -12,8 +12,8 @@ using Projeto_GestaoContratos.Data;
 namespace Projeto_GestaoContratos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240909103155_TestedMigration")]
-    partial class TestedMigration
+    [Migration("20240909112453_FinalCreate")]
+    partial class FinalCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
