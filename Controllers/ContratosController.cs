@@ -203,8 +203,8 @@ namespace Projeto_GestaoContratos.Controllers
 
             try
             {
-                // Configuração do CsvHelper para ler o CSV
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                // Configuração do CsvHelper para ler o CSV com reforço de cultura
+                var config = new CsvConfiguration(new CultureInfo("pt-BR"))
                 {
                     Delimiter = ";",
                     HasHeaderRecord = true,
