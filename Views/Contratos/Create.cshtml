@@ -4,83 +4,83 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Adicionar</h1>
 
-<h4>Contratos</h4>
-<hr />
+<div class="form-group row">
+    <div class="col-sm-12">
 
-<form asp-action="Create">
-    <div class="form-group row">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="col-sm-4 mt-2">
-            <label asp-for="Cpf" class="control-label"></label>
-            <input asp-for="Cpf" class="form-control" />
-            <span asp-validation-for="Cpf" class="text-danger"></span>
-        </div>
-        <div class="col-sm-8 mt-2">
-            <label asp-for="Nome" class="control-label"></label>
-            <input asp-for="Nome" class="form-control" />
-            <span asp-validation-for="Nome" class="text-danger"></span>
-        </div>
-        <div class="col-sm-4 mt-2">
-            <label asp-for="Contrato" class="control-label"></label>
-            <input asp-for="Contrato" class="form-control" />
-            <span asp-validation-for="Contrato" class="text-danger"></span>
-        </div>
-        <div class="col-sm-4 mt-2">
-            <label asp-for="Produto" class="control-label"></label>
-            <input asp-for="Produto" class="form-control" />
-            <span asp-validation-for="Produto" class="text-danger"></span>
-        </div>
-        <div class="col-sm-2 mt-2">
-            <label asp-for="Valor" class="control-label"></label>
-            <input asp-for="Valor" class="form-control" />
-            <span asp-validation-for="Valor" class="text-danger"></span>
-        </div>
-        <div class="col-sm-2 mt-2">
-            <label asp-for="Vencimento" class="control-label"></label>
-            <input asp-for="Vencimento" class="form-control" type="date" />
-            <span asp-validation-for="Vencimento" class="text-danger"></span>
-        </div>
-        <div class="form-group" style="display: none;">
-            <label asp-for="UsuarioEmail" class="control-label"></label>
-            <input asp-for="UsuarioEmail" class="form-control" value="@User.Identity.Name" readonly />
-            <span asp-validation-for="UsuarioEmail" class="text-danger"></span>
-        </div>
-        <div class="col-sm-4 mt-3 d-flex">
-            <input type="submit" value="Create" class="form-control btn btn-primary" />
+        <!--Título-->
+        <h1 class="text-center">Adição de Contratos</h1>
+
+        <h4>Contrato Unitário</h4>
+        <hr />
+
+        <form asp-action="Create">
+            <div class="form-group row">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="col-sm-4 mt-2">
+                    <label asp-for="Cpf" class="control-label"></label>
+                    <input asp-for="Cpf" class="form-control" />
+                    <span asp-validation-for="Cpf" class="text-danger"></span>
+                </div>
+                <div class="col-sm-8 mt-2">
+                    <label asp-for="Nome" class="control-label"></label>
+                    <input asp-for="Nome" class="form-control" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+                <div class="col-sm-4 mt-2">
+                    <label asp-for="Contrato" class="control-label"></label>
+                    <input asp-for="Contrato" class="form-control" />
+                    <span asp-validation-for="Contrato" class="text-danger"></span>
+                </div>
+                <div class="col-sm-4 mt-2">
+                    <label asp-for="Produto" class="control-label"></label>
+                    <input asp-for="Produto" class="form-control" />
+                    <span asp-validation-for="Produto" class="text-danger"></span>
+                </div>
+                <div class="col-sm-2 mt-2">
+                    <label asp-for="Valor" class="control-label"></label>
+                    <input asp-for="Valor" class="form-control" />
+                    <span asp-validation-for="Valor" class="text-danger"></span>
+                </div>
+                <div class="col-sm-2 mt-2">
+                    <label asp-for="Vencimento" class="control-label"></label>
+                    <input asp-for="Vencimento" class="form-control" type="date" />
+                    <span asp-validation-for="Vencimento" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display: none;">
+                    <label asp-for="UsuarioEmail" class="control-label"></label>
+                    <input asp-for="UsuarioEmail" class="form-control" value="@User.Identity.Name" readonly />
+                    <span asp-validation-for="UsuarioEmail" class="text-danger"></span>
+                </div>
+                <div class="col-sm-4 mt-3 d-flex">
+                    <input type="submit" value="Create" class="form-control btn btn-primary" />
+                </div>
+            </div>
+        </form>
+
+
+        <form asp-controller="Contratos" asp-action="ImportCsv" enctype="multipart/form-data" method="post">
+            <div class="mt-4">
+                <h4>Carga de Contratos</h4>
+                <hr />
+                <div class="form-group row">
+                    <div class="col-sm-8 mt-2">
+                        <label for="file">Selecionar arquivo CSV:</label>
+                        <input type="file" name="file" id="file" accept=".csv" class="form-control" />
+                    </div>
+                    <div class="col-sm-4 mt-4">
+                        <button type="submit" class="col-sm-12 btn btn-primary">Efetuar carga</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
-</form>
-
-<h1>Upload CSV</h1>
-<hr />
-<form asp-controller="Contratos" asp-action="ImportCsv" enctype="multipart/form-data" method="post">
-    @if (TempData["Message"] != null)
-
-    {
-        <div class="alert alert-success">
-            @TempData["Message"]
-        </div>
-    }
-
-    @if (TempData["Error"] != null)
-
-    {
-        <div class="alert alert-danger">
-            @TempData["Error"]
-        </div>
-    }
-    <div class="form-group">
-        <label for="file">Selecionar arquivo CSV:</label>
-        <input type="file" name="file" id="file" accept=".csv" class="form-control" />
-    </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
