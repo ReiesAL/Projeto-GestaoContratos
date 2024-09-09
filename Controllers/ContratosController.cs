@@ -22,7 +22,7 @@ namespace Projeto_GestaoContratos.Controllers
             _context = context;
         }
 
-        // GET: Contratos não deletados
+        // GET: Busca - Contratos não deletados
         public async Task<IActionResult> Index()
         {
             // Obtém todos os contratos onde Remocao é falso ou nulo
@@ -33,7 +33,7 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-        // GET: Contratos/Details/5
+        // GET: Detalhes - Busca das informações do contrato selecionado
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -62,13 +62,13 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-        // GET: Contratos/Create
+        // GET: Adicionar - Busca dos contratos
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Contratos/Create
+        // POST: Adicionar - Criação de novo contrato manualmente
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,DataInclusao,UsuarioEmail")] Contratos contratos)
@@ -94,7 +94,7 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-        // GET: Contratos/Edit/5
+        // GET: Edição - Buscar informações do contrato para adição
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -112,7 +112,7 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-        // POST: Contratos/Edit/5
+        // POST: Edição - Aplicar edições realizadas e gravar no banco
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,UsuarioInclusao")] Contratos contratos)
@@ -157,7 +157,7 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-        // GET: Contratos/Delete/5
+        // GET: Função para obter id para tela de confirmação de remoção do contrato
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -176,7 +176,7 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-        // POST: Contratos/Delete/5
+        // POST: Função de remoção de contrato e aplica alterações no banco
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -210,7 +210,7 @@ namespace Projeto_GestaoContratos.Controllers
             return _context.Contratos.Any(e => e.Id == id);
         }
 
-        // POST: Importa dados do CSV
+        // POST: Importa dados do CSV e salva no banco
         [HttpPost]
         public IActionResult ImportCsv(IFormFile file)
         {
