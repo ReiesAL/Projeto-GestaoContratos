@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Projeto_GestaoContratos.Models;
 using System.Globalization;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Projeto_GestaoContratos.Data;
-using Projeto_GestaoContratos.Models;
-using System.IO;
-using Microsoft.AspNetCore.Http;
-using CsvHelper;
 using CsvHelper.Configuration;
-using CsvReader = CsvHelper.CsvReader; // Adiciona um alias para evitar ambiguidades
+using CsvReader = CsvHelper.CsvReader;
+using Projeto_GestaoContratos.Models.Mapping; // Adiciona um alias para evitar ambiguidades
 
 
 namespace Projeto_GestaoContratos.Controllers
@@ -226,50 +218,44 @@ namespace Projeto_GestaoContratos.Controllers
 
         // Arquivo csv
         // Controlador para importar CSV
-        public class ImportacaoController : Controller
+        [HttpPost]
+        public async Task<IActionResult> ImportCsv(IFormFile file)
         {
-            private readonly ApplicationDbContext _context;
 
-            public ImportacaoController(ApplicationDbContext context)
+            try
             {
-                _context = context;
+                // Configuração do CsvHelper para ler o CSV
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";",
+                    HasHeaderRecord = true,
+                    HeaderValidated = null,
+                    MissingFieldFound = null
+                };
+
+                using (var reader = new StreamReader(file.OpenReadStream()))
+                using (var csv = new CsvReader(reader, config))
+                {
+                    // Registra a classe de mapeamento se necessário
+                    csv.Context.RegisterClassMap<ContratosMap>();
+
+                    // Lê os registros do CSV e os converte para a lista de Contratos
+                    var records = csv.GetRecords<Contratos>().ToList();
+
+                    // Adiciona os registros ao contexto do banco de dados
+                    _context.Contratos.AddRange(records);
+                    await _context.SaveChangesAsync();
+                }
+
+                // Mensagem de sucesso
+                TempData["Message"] = "Arquivo CSV importado com sucesso!";
+                return RedirectToAction("Index"); // Redireciona para a página de listagem ou onde desejar
             }
-
-            [HttpPost]
-            public async Task<IActionResult> ImportCsv(IFormFile file)
+            catch (Exception ex)
             {
-                if (file == null || file.Length == 0)
-                {
-                    ModelState.AddModelError("", "Nenhum arquivo selecionado.");
-                    return View();
-                }
-
-                try
-                {
-                    using (var reader = new StreamReader(file.OpenReadStream()))
-                    using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.InvariantCulture)
-                    {
-                        Delimiter = ";",
-                        HasHeaderRecord = true,
-                        HeaderValidated = null,
-                        MissingFieldFound = null
-                    }))
-                    {
-                        csv.Context.RegisterClassMap<ContratosMap>(); // Registra a classe de mapeamento
-
-                        var records = csv.GetRecords<Contratos>().ToList();
-
-                        _context.Contratos.AddRange(records);
-                        await _context.SaveChangesAsync();
-                    }
-
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", $"Erro ao importar o arquivo CSV: {ex.Message}");
-                    return View();
-                }
+                // Mensagem de erro
+                ModelState.AddModelError("", $"Erro ao importar o arquivo CSV: {ex.Message}");
+                return View("Index");
             }
         }
     }
