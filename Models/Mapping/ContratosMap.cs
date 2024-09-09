@@ -6,7 +6,8 @@ namespace Projeto_GestaoContratos.Models.Mapping
     public class ContratosMap : ClassMap<Contratos>
     {
         // Momento que ocorre o mapeamento de onde vem as colunas para onde quero
-        public ContratosMap() {
+        public ContratosMap()
+        {
             Map(m => m.Id).Ignore();
             Map(m => m.Cpf).Name("CPF");
             Map(m => m.Contrato).Name("Contrato");

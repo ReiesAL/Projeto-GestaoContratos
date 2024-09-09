@@ -57,6 +57,7 @@
 <hr />
 <form asp-controller="Contratos" asp-action="ImportCsv" enctype="multipart/form-data" method="post">
     @if (TempData["Message"] != null)
+
     {
         <div class="alert alert-success">
             @TempData["Message"]
@@ -64,6 +65,7 @@
     }
 
     @if (TempData["Error"] != null)
+
     {
         <div class="alert alert-danger">
             @TempData["Error"]
