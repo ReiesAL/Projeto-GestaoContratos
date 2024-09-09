@@ -114,7 +114,7 @@ namespace Projeto_GestaoContratos.Controllers
         // POST: Contratos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento")] Contratos contratos)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,UsuarioInclusao")] Contratos contratos)
         {
             if (id != contratos.Id)
             {
