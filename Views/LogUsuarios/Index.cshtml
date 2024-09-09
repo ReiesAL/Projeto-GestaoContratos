@@ -19,15 +19,15 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailUsuario)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Detalhes)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailUsuario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Detalhes)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

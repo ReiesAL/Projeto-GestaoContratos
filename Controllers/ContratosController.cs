@@ -6,17 +6,17 @@ using Projeto_GestaoContratos.Data;
 using Projeto_GestaoContratos.Models;
 using CsvHelper.Configuration;
 using CsvReader = CsvHelper.CsvReader;
-using Projeto_GestaoContratos.Models.Mapping; 
-
+using Projeto_GestaoContratos.Models.Mapping;
 
 namespace Projeto_GestaoContratos.Controllers
 {
-
-    [Authorize]
+    // Exigindo autenticação para acessar o controller
+    [Authorize] 
     public class ContratosController : Controller
     {
         private readonly ApplicationDbContext _context;
 
+        // Construtor do controller
         public ContratosController(ApplicationDbContext context)
         {
             _context = context;
@@ -27,7 +27,7 @@ namespace Projeto_GestaoContratos.Controllers
         {
             // Obtém todos os contratos onde Remocao é falso ou nulo
             var contratos = await _context.Contratos
-                .Where(c => !c.Remocao) // Filtra contratos não removidos
+                .Where(c => !c.Remocao) 
                 .ToListAsync();
 
             return View(contratos);
@@ -41,6 +41,7 @@ namespace Projeto_GestaoContratos.Controllers
                 return NotFound();
             }
 
+            // Obtém detalhes do contrato pelo ID
             var contratos = await _context.Contratos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contratos == null)
@@ -48,7 +49,7 @@ namespace Projeto_GestaoContratos.Controllers
                 return NotFound();
             }
 
-            // Adicionando log com as informações local
+            // Adiciona log de acesso aos detalhes
             _context.LogUsuarios.Add(
                 new LogUsuarios
                 {
@@ -63,7 +64,7 @@ namespace Projeto_GestaoContratos.Controllers
 
         // GET: Contratos/Create
         public IActionResult Create()
-        { 
+        {
             return View();
         }
 
@@ -76,7 +77,7 @@ namespace Projeto_GestaoContratos.Controllers
             {
                 _context.Add(contratos);
 
-                // Adicionando log com as informações local
+                // Adiciona log de criação do contrato
                 _context.LogUsuarios.Add(
                 new LogUsuarios
                 {
@@ -93,7 +94,6 @@ namespace Projeto_GestaoContratos.Controllers
             return View(contratos);
         }
 
-
         // GET: Contratos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -102,6 +102,7 @@ namespace Projeto_GestaoContratos.Controllers
                 return NotFound();
             }
 
+            // Obtém o contrato a ser editado pelo ID
             var contratos = await _context.Contratos.FindAsync(id);
             if (contratos == null)
             {
@@ -130,7 +131,7 @@ namespace Projeto_GestaoContratos.Controllers
                     _context.Update(contratos);
                     await _context.SaveChangesAsync();
 
-                    // Adicionando log com as informações local
+                    // Adiciona log de atualização do contrato
                     _context.LogUsuarios.Add(
                         new LogUsuarios
                         {
@@ -164,6 +165,7 @@ namespace Projeto_GestaoContratos.Controllers
                 return NotFound();
             }
 
+            // Obtém o contrato a ser deletado pelo ID
             var contratos = await _context.Contratos
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (contratos == null)
@@ -179,17 +181,17 @@ namespace Projeto_GestaoContratos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-
+            // Obtém o contrato a ser removido pelo ID
             var contrato = await _context.Contratos.FindAsync(id);
             if (contrato != null)
             {
                 contrato.Remocao = true; // Marca o contrato como removido
-                contrato.DataRemocao = DateTime.Now; // Adiciona a data de remoção como DateTime
+                contrato.DataRemocao = DateTime.Now; // Adiciona a data de remoção
                 contrato.UsuarioRemocao = User.Identity.Name;
 
                 _context.Update(contrato);
 
-                // Adicionando log com as informações local
+                // Adiciona log de remoção do contrato
                 _context.LogUsuarios.Add(new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
@@ -202,19 +204,19 @@ namespace Projeto_GestaoContratos.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // Verifica se o contrato existe
         private bool ContratosExists(int id)
         {
             return _context.Contratos.Any(e => e.Id == id);
         }
 
-        // Arquivo csv
-        // Controlador para importar CSV
+        // POST: Importa dados do CSV
         [HttpPost]
         public IActionResult ImportCsv(IFormFile file)
         {
             try
-            { 
-                // Configuração do CsvHelper para ler o CSV com reforço de cultura
+            {
+                // Configuração do CsvHelper para ler o CSV
                 var config = new CsvConfiguration(new CultureInfo("pt-BR"))
                 {
                     Delimiter = ";",
@@ -226,18 +228,19 @@ namespace Projeto_GestaoContratos.Controllers
                 using (var reader = new StreamReader(file.OpenReadStream()))
                 using (var csv = new CsvReader(reader, config))
                 {
-                    var userName = User.Identity.Name; // Captura o nome do usuário autenticado
+                    // Captura o nome do usuário autenticado
+                    var userName = User.Identity.Name; 
 
-                    // Registra a classe e Passa o nome do usuário para o mapeamento
-                    csv.Context.RegisterClassMap(new ContratosMap(userName)); 
+                    // Registra a classe e passa o nome do usuário para o mapeamento
+                    csv.Context.RegisterClassMap(new ContratosMap(userName));
 
-                    // Lê os registros do CSV e os converte para a lista de Contratos
+                    // Lê e converte registros do CSV para a lista de Contratos
                     var records = csv.GetRecords<Contratos>().ToList();
 
-                    // Adiciona os registros ao contexto do banco de dados
+                    // Adiciona registros ao contexto do banco de dados
                     _context.Contratos.AddRange(records);
 
-                    // Adicionando log com as informações local
+                    // Adiciona log de importação de contratos
                     _context.LogUsuarios.Add(
                     new LogUsuarios
                     {
@@ -248,7 +251,7 @@ namespace Projeto_GestaoContratos.Controllers
                     _context.SaveChanges();
                 }
 
-                return RedirectToAction("Index"); // Redireciona para a página de listagem ou onde desejar
+                return RedirectToAction("Index"); // Redireciona para a página de listagem
             }
             catch
             {
