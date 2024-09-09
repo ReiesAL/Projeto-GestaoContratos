@@ -12,7 +12,7 @@ using Projeto_GestaoContratos.Data;
 namespace Projeto_GestaoContratos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240909044102_InitialCreate")]
+    [Migration("20240909050849_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -279,8 +279,8 @@ namespace Projeto_GestaoContratos.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Valor");
 
-                    b.Property<DateTime>("Vencimento")
-                        .HasColumnType("datetime2")
+                    b.Property<DateOnly>("Vencimento")
+                        .HasColumnType("date")
                         .HasColumnName("Vencimento");
 
                     b.HasKey("Id");

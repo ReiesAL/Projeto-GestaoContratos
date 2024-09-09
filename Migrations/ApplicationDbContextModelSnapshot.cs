@@ -276,8 +276,8 @@ namespace Projeto_GestaoContratos.Migrations
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("Valor");
 
-                    b.Property<DateTime>("Vencimento")
-                        .HasColumnType("datetime2")
+                    b.Property<DateOnly>("Vencimento")
+                        .HasColumnType("date")
                         .HasColumnName("Vencimento");
 
                     b.HasKey("Id");

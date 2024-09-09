@@ -6,7 +6,7 @@ using Projeto_GestaoContratos.Data;
 using Projeto_GestaoContratos.Models;
 using CsvHelper.Configuration;
 using CsvReader = CsvHelper.CsvReader;
-using Projeto_GestaoContratos.Models.Mapping; // Adiciona um alias para evitar ambiguidades
+using Projeto_GestaoContratos.Models.Mapping; 
 
 
 namespace Projeto_GestaoContratos.Controllers
@@ -47,33 +47,21 @@ namespace Projeto_GestaoContratos.Controllers
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = $"Entrou na tela de detalhes do contrato {contratos.Id} - {contratos.Nome}"
+                    Detalhes = $"Entrou na tela de detalhes do contrato {contratos.Id} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
                 });
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return View(contratos);
         }
 
         // GET: Contratos/Create
         public IActionResult Create()
-        {
-            // Adicionando log com as informações local
-            _context.LogUsuarios.Add(
-                new LogUsuarios
-                {
-                    EmailUsuario = User.Identity.Name,
-                    Detalhes = "Entrou na tela de cadastro de contratos"
-                });
-
-            _context.SaveChanges();
-
+        { 
             return View();
         }
 
         // POST: Contratos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Cpf,Contrato,Nome,Produto,Valor,Vencimento,DataInclusao,UsuarioEmail")] Contratos contratos)
@@ -90,10 +78,11 @@ namespace Projeto_GestaoContratos.Controllers
                 new LogUsuarios
                 {
                     EmailUsuario = User.Identity.Name,
-                    Detalhes = $"Adicionou o contrato {contratos.Id} - {contratos.Nome}"
+                    Detalhes = $"Adicionou um novo contrato {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
+
                 });
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return View(contratos);
         }
@@ -112,16 +101,6 @@ namespace Projeto_GestaoContratos.Controllers
             {
                 return NotFound();
             }
-
-            // Adicionando log com as informações local
-            _context.LogUsuarios.Add(
-                new LogUsuarios
-                {
-                    EmailUsuario = User.Identity.Name,
-                    Detalhes = $"Entrou na tela de edição de contratos {contratos.Id} - {contratos.Nome}"
-                });
-
-            await _context.SaveChangesAsync();
 
             return View(contratos);
         }
@@ -148,9 +127,9 @@ namespace Projeto_GestaoContratos.Controllers
                         new LogUsuarios
                         {
                             EmailUsuario = User.Identity.Name,
-                            Detalhes = $"Atualizou o contrato: {contratos.Contrato} Data de atualização: {DateTime.Now.ToLongDateString()}"
+                            Detalhes = $"Atualizou o contrato: {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
                         });
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
 
                     return RedirectToAction(nameof(Index));
                 }
@@ -202,10 +181,10 @@ namespace Projeto_GestaoContratos.Controllers
                     new LogUsuarios
                     {
                         EmailUsuario = User.Identity.Name,
-                        Detalhes = $"Removeu o contrato: {contratos.Contrato} Data de remoção: {DateTime.Now.ToLongDateString()}"
+                        Detalhes = $"Removeu o contrato: {contratos.Contrato} - {contratos.Nome} em {DateTime.Now.ToLongDateString()}"
                     });
 
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
 
             return RedirectToAction(nameof(Index));
@@ -244,17 +223,22 @@ namespace Projeto_GestaoContratos.Controllers
 
                     // Adiciona os registros ao contexto do banco de dados
                     _context.Contratos.AddRange(records);
-                    await _context.SaveChangesAsync();
+
+                    // Adicionando log com as informações local
+                    _context.LogUsuarios.Add(
+                    new LogUsuarios
+                    {
+                        EmailUsuario = User.Identity.Name,
+                        Detalhes = $"Adicionou uma carga de contratos em {DateTime.Now.ToLongDateString()}"
+                    });
+
+                    _context.SaveChanges();
                 }
 
-                // Mensagem de sucesso
-                TempData["Message"] = "Arquivo CSV importado com sucesso!";
                 return RedirectToAction("Index"); // Redireciona para a página de listagem ou onde desejar
             }
             catch (Exception ex)
-            {
-                // Mensagem de erro
-                ModelState.AddModelError("", $"Erro ao importar o arquivo CSV: {ex.Message}");
+            { 
                 return View("Index");
             }
         }
