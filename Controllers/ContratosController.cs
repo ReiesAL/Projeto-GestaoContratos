@@ -211,6 +211,8 @@ namespace Projeto_GestaoContratos.Controllers
 
             try
             {
+                var userName = User.Identity.Name; // Captura o nome do usuário autenticado
+
                 // Configuração do CsvHelper para ler o CSV com reforço de cultura
                 var config = new CsvConfiguration(new CultureInfo("pt-BR"))
                 {
@@ -224,7 +226,7 @@ namespace Projeto_GestaoContratos.Controllers
                 using (var csv = new CsvReader(reader, config))
                 {
                     // Registra a classe de mapeamento se necessário
-                    csv.Context.RegisterClassMap<ContratosMap>();
+                    csv.Context.RegisterClassMap(new ContratosMap(userName)); // Passa o nome do usuário para o mapeamento
 
                     // Lê os registros do CSV e os converte para a lista de Contratos
                     var records = csv.GetRecords<Contratos>().ToList();
