@@ -14,8 +14,8 @@ namespace Projeto_GestaoContratos.Models
 
         [Column("Cpf")]
         [Display(Name = "CPF")]
-        [StringLength(14)] 
-        public required string Cpf { get; set; } 
+        [StringLength(14)]
+        public required string Cpf { get; set; }
 
         [Column("Contrato")]
         [Display(Name = "Contrato")]
@@ -38,14 +38,22 @@ namespace Projeto_GestaoContratos.Models
         [Display(Name = "Vencimento")]
         public required DateTime Vencimento { get; set; }
 
-        [Column("DataInclusao")]
-        [Display(Name = "Data Inclusão")]
-        public DateTime DataInclusao { get; set; } = DateTime.Today; // Define a data de inclusão com hora 
-
         [Column("UsuarioEmail")]
         [Display(Name = "Usuário Email")]
-        [StringLength(180)]  
+        [StringLength(180)]
         public string UsuarioEmail { get; set; }
+
+        [Column("DataInclusao")]
+        [Display(Name = "Data de Inclusão")]
+        public DateTime DataInclusao { get; set; } = DateTime.Today; // Define a data de inclusão com hora 00:00
+
+        [Column("Remocao")]
+        [Display(Name = "Remoção")]
+        public bool Remocao { get; set; } // Use bool para indicar remoção
+
+        [Column("DataRemocao")]
+        [Display(Name = "Data de Remoção")]
+        public DateTime? DataRemocao { get; set; } // Nullable para permitir ausência de data
 
     }
 }

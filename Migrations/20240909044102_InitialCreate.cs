@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Projeto_GestaoContratos.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateBd : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,8 +62,10 @@ namespace Projeto_GestaoContratos.Migrations
                     Produto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     Vencimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UsuarioEmail = table.Column<string>(type: "nvarchar(180)", maxLength: 180, nullable: false),
                     DataInclusao = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UsuarioEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false)
+                    Remocao = table.Column<bool>(type: "bit", nullable: false),
+                    DataRemocao = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {

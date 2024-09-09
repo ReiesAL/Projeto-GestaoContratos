@@ -12,8 +12,8 @@ using Projeto_GestaoContratos.Data;
 namespace Projeto_GestaoContratos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240908190954_CreateBd")]
-    partial class CreateBd
+    [Migration("20240909044102_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -250,6 +250,10 @@ namespace Projeto_GestaoContratos.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DataInclusao");
 
+                    b.Property<DateTime?>("DataRemocao")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DataRemocao");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -260,15 +264,20 @@ namespace Projeto_GestaoContratos.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Produto");
 
+                    b.Property<bool>("Remocao")
+                        .HasColumnType("bit")
+                        .HasColumnName("Remocao");
+
                     b.Property<string>("UsuarioEmail")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)")
+                        .HasMaxLength(180)
+                        .HasColumnType("nvarchar(180)")
                         .HasColumnName("UsuarioEmail");
 
                     b.Property<decimal>("Valor")
                         .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Valor");
 
                     b.Property<DateTime>("Vencimento")
                         .HasColumnType("datetime2")
