@@ -11,74 +11,100 @@
         <!--Título-->
         <h1 class="text-center">Listagem de todos os contratos</h1>
 
-        <div class="d-flex justify-content-end">
-            <a class="btn btn-primary btn-customize" asp-action="Create">Adicionar</a>
+        <div class="mt-4 d-flex justify-content-end">
+            <a class="btn btn-success col-sm-4" asp-action="Create">Adicionar novo contrato</a>
         </div>
         <hr/>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Cpf)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Contrato)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Produto)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Valor)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Vencimento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DataInclusao)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.UsuarioInclusao)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model) {
+        <div class="table-container">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cpf)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Contrato)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Produto)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Valor)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Vencimento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DataInclusao)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UsuarioInclusao)
-                        </td>
-                        <td class ="btn-group" role="group" aria-label="Basic example">
-                            <a type="button" asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Detalhes</a> 
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cpf)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Contrato)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Produto)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Valor)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Vencimento)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DataInclusao)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UsuarioInclusao)
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cpf)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Contrato)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Produto)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Valor)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vencimento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DataInclusao)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UsuarioInclusao)
+                            </td>
+                            <td class="btn-group" role="group" aria-label="Basic example">
+                                <a type="button" asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Detalhes</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <style>
+            .table-container {
+                max-height: 50%; /* Ajuste a altura máxima conforme necessário */
+                overflow: auto; /* Permite rolagem horizontal e vertical */
+                -webkit-overflow-scrolling: touch; /* Suporte a rolagem suave em iOS */
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+            }
+
+            thead th {
+                background-color: #f4f4f4;
+            }
+        </style>
+
     </div>
 </div>
