@@ -14,7 +14,7 @@
         <h4 class="display-6">@Model.Nome</h4>
         <hr />
 
-        <!--Ficha-Contrato->
+        <!--Ficha-Contrato-->
         <dl class="col-sm-12 row">
             <dt class = "col-sm-2">
                 @Html.DisplayNameFor(model => model.Cpf)
@@ -70,7 +70,7 @@
     <div class="row justify-content-between">
         <a type="button" asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-secondary col-sm-4">Editar</a>
         <a type="button" asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger col-sm-4">Deletar</a>
-        <a class="mt-2" asp-action="Index">Voltar para lista</a>
+        <a class="mt-4" asp-action="Index">Voltar para lista</a>
     </div>
 </div>
 

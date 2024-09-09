@@ -8,9 +8,6 @@
     <div class="col-sm-12">
 
         <!--Título-->
-        <h1 class="display-4">Remover</h1>
-
-        <!--Sub-Título-->
         <h1 class="display-6 text-center">Você tem certeza de que deseja remover o contrato de número @Model.Contrato com nome de @Model.Nome?</h1>
         <hr />
 
@@ -69,8 +66,12 @@
         <form asp-action="Delete">
             <input type="hidden" asp-for="Id" />
             <hr/>
-            <input type="submit" value="Remover" class="btn btn-danger col-sm-6"/> 
-            <a asp-action="Index">Voltar para a lista</a>
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Remover" class="btn btn-danger col-sm-6"/> 
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <a asp-action="Index" class="mt-4">Voltar para a lista</a>
+            </div>
         </form>
     </div>
 </div>
